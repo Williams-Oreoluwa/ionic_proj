@@ -1,0 +1,98 @@
+ion-icon.git-logo {
+    font-size: 3rem;
+}
+form {
+    display: grid;
+    place-items: left;
+    gap: .8rem;
+
+}
+ion-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.item{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .4rem;
+}
+.register-details{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .5rem;
+    place-items: center;
+}
+
+ion-input.text-input{
+    width: 100%;  
+    height: 1%;
+    background: white;
+    border: none;
+    border-radius: .6rem;
+  
+    
+}
+.git-logo-header{
+    font-size: 2rem;
+    padding-left: .8rem;
+}
+.header{
+    display: flex;
+}
+.register-details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+form.text{
+    text-align: left;
+}
+
+ion-card-content{
+ 
+    background: rgb(247, 248, 248);
+}
+
+.card-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+
+}
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.footer ul{
+    display: flex;
+    gap: .6rem;
+}
+.footer ul li{
+   list-style: none;
+}
+.footer ul li a{
+    text-decoration: none;
+    font-size: .8rem;
+}
+.contact-github{
+    color: rgb(92, 92, 92);
+}
+
+.footer ul li a:hover{
+    color: rgb(95, 157, 245);
+    text-decoration: underline;
+}
+
+
+  
+
+
+
+  
