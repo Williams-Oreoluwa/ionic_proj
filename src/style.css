@@ -7,13 +7,17 @@ form {
     gap: .8rem;
 
 }
+
+/* ion-router-link{
+    font-size: ;
+}
 ion-content{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-.item{
+} */
+.data{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: .4rem;
@@ -34,6 +38,7 @@ ion-input.text-input{
   
     
 }
+
 .git-logo-header{
     font-size: 2rem;
     padding-left: .8rem;
@@ -56,20 +61,20 @@ ion-card-content{
     background: rgb(247, 248, 248);
 }
 
-.card-container{
+/* .card-container{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 
 
-}
-.footer{
+} */
+/* .footer{
     display: flex;
     align-items: center;
     justify-content: center;
 
-}
+} */
 .footer ul{
     display: flex;
     gap: .6rem;
