@@ -28,7 +28,6 @@ const Login: React.FC = () => {
     await isLoading("Logging in.");
     setTimeout(() => {
       isLoaded();
-
       router.push("/home", "root");
     }, 3000);
   };

@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import Verify from "./pages/Verify";
+import Users from "./pages/users";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -40,6 +41,7 @@ const App: React.FC = () => (
         <Route component={ForgotPassword} path="/forgot+password" exact />
         <Route component={Home} path="/home" />
         <Route component={Verify} path="/verify" exact />
+        <Route component={Users} path='/home/users/:login/' exact/>
        
       </IonRouterOutlet>
     </IonReactRouter>

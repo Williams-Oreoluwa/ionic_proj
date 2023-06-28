@@ -15,9 +15,16 @@ import {
   IonToggle,
   IonList,
   IonLabel,
-  IonSearchbar
+  IonSearchbar,
+  IonCardContent,
+  IonCard,
+  IonImg,
+  IonRouterLink,
+  IonFooter,
+  IonLoading,
+  RefresherEventDetail
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
+
 import "./Home.css";
 import {
   checkboxOutline,
@@ -34,13 +41,32 @@ import {
   sunnyOutline,
   moonOutline,
 } from "ionicons/icons";
-import { useIonRouter, useIonLoading } from "@ionic/react";
-import { useState } from "react";
+import {
+  useIonRouter,
+  useIonLoading,
+  IonGrid,
+  IonRow,
+  IonCol,
+} from "@ionic/react";
+import { useEffect, useState } from "react";
+const api = "https://api.github.com/users";
+
+import githubSecretToken from "./githubToken";
 
 const Home: React.FC = () => {
   const [isLoading, isLoaded] = useIonLoading();
   const [light, setLight] = useState(true);
+  const [users, setUsers] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
+  useEffect(() => {
+    const headers = { 'Authorization': `token ${githubSecretToken}` };
+    fetch('https://api.github.com/users', { headers })
+        .then(response => response.json())
+        .then(data => setUsers(data));
+    
+  
+}, []);
   const router = useIonRouter();
   const logOutPage = async () => {
     await isLoading("Logging out.");
@@ -49,6 +75,8 @@ const Home: React.FC = () => {
       router.push("/", "root");
     }, 3000);
   };
+
+
   const switchColors = () => {
     document.body.classList.toggle("dark");
     setLight(!light);
@@ -70,12 +98,13 @@ const Home: React.FC = () => {
       icon: settingsOutline,
     },
   ];
+
   return (
     <>
-      <IonSplitPane when="lg" contentId="main" className="stuff">
+      <IonSplitPane when="xl" contentId="main" className="stuff">
         <IonMenu contentId="main">
           <IonHeader>
-            <IonToolbar color="dark">
+            <IonToolbar color={'dark'}>
               <IonTitle>Menu Content</IonTitle>
             </IonToolbar>
           </IonHeader>
@@ -136,13 +165,71 @@ const Home: React.FC = () => {
                 <IonTitle>GitHub</IonTitle>
               </div>
             </IonToolbar>
-            <IonToolbar color={"dark"}>
-              <IonSearchbar />
+            <IonToolbar color={"dark"} className="dog">
+              <IonSearchbar
+                value={searchQuery}
+                onIonInput={(e: any) => setSearchQuery(e.target.value)}
+              />
             </IonToolbar>
           </IonHeader>
           <IonContent className="ion-padding">
-            Tap the button in the toolbar to open the menu.
+            <div className="section">
+              {users.length < 1 ? (
+                <IonLoading>Loading Users</IonLoading>
+              ) : (
+                users
+                  .filter((user) =>
+                    user.login.toLowerCase().includes(searchQuery)
+                  )
+                  .map((user) => {
+                    const { id, login, avatar_url } = user;
+                    const profilePage = async () => {
+                      await isLoading("Loading Profile page.");
+                      setTimeout(() => {
+                        isLoaded();
+                        router.push(`/home/users/${login}`, "root");
+                        window.location.reload()
+                     
+                      }, 1000);
+                    };
+                    return (
+                      <>
+                        <section className="github-users">
+                          <article className="user">
+                            <IonCard className="card">
+                              <IonCardContent className = {`users-data ${light ? 'ion-background-color-light' : 'ion-background-color-dark'}`} >
+                                <div className="user-data">
+                                  <img
+                                    className="avatar-image"
+                                    src={avatar_url}
+                                    alt={login}
+                                  />
+                                  <h2>{login}</h2>
+                                </div>
+                                <div className="users-btn">
+                                  <IonButton
+                                    className="profile-btn"
+                                    slot="end"
+                            
+                                    color={`dark`}
+                                    onClick={profilePage}
+                                  >
+                                    View Profile
+
+                                   
+                                  </IonButton>
+                                </div>
+                              </IonCardContent>
+                            </IonCard>
+                          </article>
+                        </section>
+                      </>
+                    );
+                  })
+              )}
+            </div>
           </IonContent>
+  
         </IonPage>
       </IonSplitPane>
     </>
